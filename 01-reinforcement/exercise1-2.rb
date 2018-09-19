@@ -1,57 +1,43 @@
-# check if first letter is vowel or constant
+trains = [
+{train: "72C", frequency_in_minutes: 15, direction: "north"},
+{train: "72D", frequency_in_minutes: 15, direction: "south"},
+{train: "610", frequency_in_minutes: 5, direction: "north"},
+{train: "611", frequency_in_minutes: 5, direction: "south"},
+{train: "80A", frequency_in_minutes: 30, direction: "east"},
+{train: "80B", frequency_in_minutes: 30, direction: "west"},
+{train: "110", frequency_in_minutes: 15, direction: "north"},
+{train: "111", frequency_in_minutes: 15, direction: "south"}
+]
 
-# if vowel: apply vowel rules
+def select_train(trains_h, train_no)
+  selected = trains_h.select { |train| train[:train] == train_no}
+  selected[0]
+end
 
-# if constant: apply constant rules
+train111_direction = select_train(trains, "111")[:direction]
+puts train111_direction
 
+train80B_frequency = select_train(trains, "80B")[:frequency_in_minutes]
+puts train80B_frequency
 
+train610_direction = select_train(trains, "610")[:direction]
+puts train610_direction
 
-  # method to figure out if vowel or not
-
-  def is_vowel?(letter)
-    vowels = ["a", "e", "i", "o", "u"]
-    vowels.include?(letter)
-  end
-
-
-  # add ay to the end of the string
-
-
-  def pig_latin(word)
-    letters = word.chars
-    new_letters = word.chars
-
-    letters.each_with_index do |chr, e|
-      if is_vowel?(chr)
-        break
-      end
-
-      if chr == "q"
-        #check if next char is u
-        index = e + 1
-        if letters[index] == "u"
-          new_letters << new_letters.shift
-          new_letters << new_letters.shift
-          letters.delete_at(e)
-          letters.delete_at(index)
-        else
-          new_letters << new_letters.shift
-        end
-
-      else
-          new_letters << new_letters.shift
+def trains_going(direction, trains)
+  train_names = []
+  trains.each do |train|
+    train.each do |k, v|
+      if v == direction
+        train_names << train[:train]
       end
     end
-    new_letters << "Ay"
-
-    new_letters.join.to_s
   end
+  train_names
+end
+puts "****************************************"
+puts trains_going("north", trains)
+puts "****************************************"
+puts trains_going("east", trains)
 
-
-puts "mbjartin is #{pig_latin("mbjartin")}"
-puts "squeeze is #{pig_latin("squeeze")}"
-puts "augusto is #{pig_latin("augusto")}"
-puts "meliza is #{pig_latin("meliza")}"
-puts "ilario is #{pig_latin("ilario")}"
-
-  # move it to the end of string
+trains[Random.rand(7)][:first_departure_time] = 6
+puts trains
