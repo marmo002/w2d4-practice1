@@ -1,22 +1,12 @@
 
-def totals_count
-  roll1 = (1..6).to_a
-  roll2 = (1..6).to_a
-  total_counts = {}
+  total_counts = Hash.new(0)
 
-  roll1.each do |a|
-    roll2.each do |b|
-      total = a + b
-      if total_counts[total]
-        total_counts[total] += 1
-      else
-        total_counts[total] = 1
-      end
+  (1..6).each do |a|
+    (1..6).each do |b|
+      total_counts[a + b] += 1
     end
   end
-  total_counts
-end
 
-totals_count.each { |k, v|
-  puts "#{k} occurs #{v} times"
-}
+  total_counts.each { |k, v|
+    puts "#{k} occurs #{v} times"
+  }
