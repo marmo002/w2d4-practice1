@@ -8,5 +8,6 @@
   end
 
   total_counts.each { |k, v|
-    puts "#{k} occurs #{v} times"
+    odd = (v / 36.0) * 100
+    puts "The odds of #{k} coming up are #{odd.round}%"
   }
